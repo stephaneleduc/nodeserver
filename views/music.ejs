@@ -4,11 +4,11 @@
     <ul>
         <% for (var musics of music) { %>
             <li>
-                <%= musics %>
+                <%= musics.id + " : " + musics.label %>
             </li>
 
         <% } %>
         
     </ul>
-    
+
 <% include commons/footer %>
