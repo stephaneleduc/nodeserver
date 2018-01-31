@@ -1,6 +1,13 @@
 <% include commons/header %>
 
     <h1>Welcome Music !</h1>
+
+    <% if (error) { %>
+
+        <h4> <%= error %> </h4>
+
+    <% } %>
+
     <ul>
         <% for (var musics of music) { %>
             <li>
@@ -10,5 +17,18 @@
         <% } %>
         
     </ul>
+
+    <form method="POST" action="/addmusic">
+       <input type="text" name="title">
+       <input type="submit" value="Ajouter">
+    </form>
+
+
+    <% if (insert_error) { %>
+
+        <h4> <%= insert_error %> </h4>
+
+    <% } %>
+
 
 <% include commons/footer %>
