@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const connection = require ("./connection");
+const logger = require ("./logger");
 
 connection.connect(function(err) {
     if (err) {
@@ -24,11 +25,15 @@ connection.connect(function(err) {
     app.use( bodyParser.urlencoded( { extended: true })); //for get datas
     app.use( bodyParser.json());//for post datas
 
+    app.use(logger);
+
+
     //Dossier Public | Static files
     app.use(express.static('views/public'));
 
     app.get("/musics/:id([0-9]+)", function(req, res) {
 
+        console.log(req.logs);
         const id = req.params.id;
         const sql = "Select * from musics where id = ?";
         connection.query(sql, [id], function(err, results) {
@@ -106,7 +111,7 @@ connection.connect(function(err) {
 
     //default route ( à mettre à la fin)
     app.use(function (req, res) {
-        res.render("404", {title: "404 Not Found"});
+        res.status(404).render("404", {title: "404 Not Found"});
     });
 
     app.listen(3000, function () {

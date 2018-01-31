@@ -11,7 +11,7 @@
     <ul>
         <% for (var musics of music) { %>
             <li>
-                <%= musics.id + " : " + musics.label %>
+               <a href="/musics/<%= musics.id %>"><%= musics.id + " : " + musics.label %></a>
             </li>
 
         <% } %>
